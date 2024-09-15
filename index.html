@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Mobile Location Tracking</title>
+</head>
+<body>
+    <h1>Real-Time Mobile Location Tracking</h1>
+    <p id="location">Fetching location...</p>
+    <script>
+        if (navigator.geolocation) {
+            navigator.geolocation.watchPosition((position) => {
+                const { latitude, longitude } = position.coords;
+                document.getElementById('location').textContent = `Latitude: ${latitude}, Longitude: ${longitude}`;
+                // You can send this data to a server if you set up one
+                console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+            }, (error) => {
+                console.error('Error getting location:', error);
+            }, {
+                enableHighAccuracy: true,
+                maximumAge: 0,
+                timeout: 5000
+            });
+        } else {
+            alert('Geolocation is not supported by this browser.');
+        }
+    </script>
+</body>
+</html>
